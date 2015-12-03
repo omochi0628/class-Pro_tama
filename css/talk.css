@@ -1,0 +1,196 @@
+@charset "utf-8";
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100;
+    background-color: #dddddd;
+}
+
+
+/*---#文字関係のデフォ設定を解除,書体設定----------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+small {
+    border: 0;
+    font-style: normal;
+    font-weight: normal;
+    height: auto;
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    vertical-align: baseline;
+    width: 100%;
+    font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    text-align: center;
+}
+
+
+/*---#header-------------------------------------------------------*/
+
+header {
+    /*    padding: 1%;*/
+    height: 10%;
+    text-align: center;
+    background-color: #147e7e;
+}
+
+header h1 {
+    padding-top: 0.5%;
+    font-weight: bold;
+    font-size: 42px;
+}
+
+header p {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+/*---#main-------------------------------------------------------*/
+
+main {
+    margin: 3.5% 20%;
+    padding: 1%;
+    text-align: center;
+    background-color: #eeeeee;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+main dt {
+    margin-top: 1%;
+}
+
+main dd {
+    margin: 0;
+}
+
+main span.required {
+    width: 30px;
+    height: 15px;
+    background-color: red;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+main p.error,
+main p.error_d {
+    /*    visibility: hidden;*/
+    margin: 0.5% auto;
+    font-size: 15px;
+    text-align: center;
+    color: red;
+}
+
+main h3 {
+    margin: 1% auto;
+    font-size: 25px;
+}
+
+main img {
+    margin: 1%;
+}
+
+div#msg {
+    margin-top: 2%;
+}
+
+main ul.paging {
+    padding-left: 45%;
+    padding-right: 10%;
+}
+
+main li {
+    padding-right: 68%;
+}
+
+
+/*---talk-------------------------------------------------------*/
+
+div#wrapper {}
+
+div#talk {
+    margin: 3.5% 5% 3.5% 5%;
+    padding: 1%;
+    text-align: center;
+    background-color: #eeeeee;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+div#tags {
+    margin: 3.5% 5% 3.5% 5%;
+    padding: 1%;
+    text-align: center;
+    background-color: #eeeeee;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+
+
+div#talk dt {
+    margin-top: 1%;
+}
+
+div#talk dd {
+    margin: 0;
+}
+
+div#talk hr {
+    margin-top: 3%;
+}
+
+div.scrollbox {
+    margin: 0% 40.5%;
+    overflow: auto;
+    width: 200px;
+    height: 100px;
+    background-color: #ffffff;
+    border: 1px #c0c0c0 solid;
+}
+
+p.gengo {
+    margin-top: 2%;
+}
+
+ul.lists {
+    margin: 0 0;
+    padding: 0 0;
+    list-style: none;
+}
+
+ul.tagslist {
+    margin: 0 0;
+    padding: 0 0;
+    list-style: none;
+}
+
+li.list {
+    margin: 10px;
+    text-align: center;
+}
+
+div#talk div.msg {
+    margin-top: 2%;
+}
+
+div#talk ul.paging {
+    padding-left: 45%;
+    padding-right: 10%;
+}
+
+div#talk li.idou {
+    padding-right: 68%;
+}

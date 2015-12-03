@@ -1,0 +1,95 @@
+@charset "utf-8";
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100;
+    background-color: #dddddd;
+}
+
+
+/*---#文字関係のデフォ設定を解除,書体設定----------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+small {
+    border: 0;
+    font-style: normal;
+    font-weight: normal;
+    height: auto;
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    vertical-align: baseline;
+    width: 100%;
+    font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    text-align: center;
+}
+
+
+/*---#header-------------------------------------------------------*/
+
+header {
+    /*    padding: 1%;*/
+    height: 10%;
+    text-align: center;
+    background-color: #147e7e;
+}
+
+header h1 {
+    padding-top: 0.5%;
+    font-weight: bold;
+    font-size: 42px;
+}
+
+header p {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+/*---#talk-------------------------------------------------------*/
+
+div#talk {
+    margin: 3.5% 20%;
+    padding: 1%;
+    text-align: center;
+    background-color: #eeeeee;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+div#talk dt {
+    margin-top: 1%;
+}
+
+dd {
+    margin: 0;
+}
+
+/*---footer-------------------------------------------------------*/
+
+footer {
+    position: absolute;
+    bottom: 0;
+    height: 8%;
+    width: 100%;
+    /*    padding: 0.5% 0;*/
+    text-align: center;
+    background-color: #147e7e;
+}
+
+footer hr {
+    margin: 0.5% 0 0 0;
+    border: none;
+    border-top: dashed 3px;
+    height: 4px;
+    color: #ffffff;
+}
