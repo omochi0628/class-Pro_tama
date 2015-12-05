@@ -54,73 +54,42 @@ header p {
 }
 
 
-/*---#main-------------------------------------------------------*/
-
-main {
-    margin: 3.5% 20%;
-    padding: 1%;
-    text-align: center;
-    background-color: #eeeeee;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-}
-
-main dt {
-    margin-top: 1%;
-}
-
-main dd {
-    margin: 0;
-}
-
-main span.required {
-    width: 30px;
-    height: 15px;
-    background-color: red;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-}
-
-main p.error,
-main p.error_d {
-    /*    visibility: hidden;*/
-    margin: 0.5% auto;
-    font-size: 15px;
-    text-align: center;
-    color: red;
-}
-
-main h3 {
-    margin: 1% auto;
-    font-size: 25px;
-}
-
-main img {
-    margin: 1%;
-}
-
-div#msg {
-    margin-top: 2%;
-}
-
-main ul.paging {
-    padding-left: 45%;
-    padding-right: 10%;
-}
-
-main li {
-    padding-right: 68%;
-}
+/*---#-------------------------------------------------------*/
 
 
 /*---talk-------------------------------------------------------*/
 
-div#wrapper {}
+div#talk,
+div#tags {
+    float: left;
+}
+
+div#set {
+    overflow: hidden;
+}
+
+
+/* clearfix */
+
+div#set:before,
+div#set:after {
+    content: "";
+    display: table;
+}
+
+div#set:after {
+    clear: both;
+}
 
 div#talk {
-    margin: 3.5% 5% 3.5% 5%;
-    padding: 1%;
+    margin-top: 3.5%;
+    margin-right: 5%;
+    margin-bottom: 3.5%;
+    margin-left: 7%;
+    padding-top: 3.5%;
+    padding-right: 17%;
+    padding-bottom: 3.5%;
+    padding-left: 15%;
     text-align: center;
     background-color: #eeeeee;
     -moz-border-radius: 15px;
@@ -129,16 +98,20 @@ div#talk {
 }
 
 div#tags {
-    margin: 3.5% 5% 3.5% 5%;
-    padding: 1%;
+    margin-top: 3.5%;
+    margin-right: 3%;
+    margin-bottom: 3.5%;
+    margin-left: 1%;
+    padding-top: 3.5%;
+    padding-right: 8%;
+    padding-bottom: 3.5%;
+    padding-left: 8%;
     text-align: center;
     background-color: #eeeeee;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
 }
-
-
 
 div#talk dt {
     margin-top: 1%;

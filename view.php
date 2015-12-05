@@ -3,7 +3,7 @@
         
         require('dbconnect.php');
         
-        if(empty($_REQUEST['id'])){
+        if(empty($_REQUEST['id'])){//URLパラメータの['id]が正しく指定されているかチェック
             header('Location: talk.php');
             exit();
         }
@@ -53,7 +53,7 @@
         <!--fotter-->
         <footer>
             <hr>
-            <small> Copyright (c) 2015 E14C2002 Fujimoto Sachiko, All Rights Reserved.</small>
+            <small> Copyright (c) 2015 Fujimoto Sachiko, All Rights Reserved.</small>
             <hr>
         </footer>
 

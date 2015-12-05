@@ -3,71 +3,62 @@
 
         session_start();
 
-        //$_POSTの各配列の中身が空でないかをチェック
-        //・[name],[userID],[password]が空かを確認し、$error配列を生成、中に'blanl'を入れておく。
-        //　→『未入力』エラーメッセージの出力に使用
-        //・[password]は、strlenファンクションで確認し、4文字未満であれば'length'を入れておく。
-        //　→『文字数不足』エラーメッセージ出力に使用
-        if(isset($_POST['name'],$_POST['userID'],$_POST['password'])){
+  
+        if(isset($_POST['name'],$_POST['userID'],$_POST['password'])){//$_POSTの各配列の中身が空でないかをチェック
             //エラー項目の確認
-            if($_POST['name']==''){
+            if($_POST['name']==''){//['name']が空白の場合、$error['name']生成、'blanl'を入れる→未入力
                 $error['name']='blank';
             }
-            if($_POST['userID']==''){
+            if($_POST['userID']==''){//['userID']が空白の場合、$error['userID']生成、'blanl'を入れる→未入力
                 $error['userID']='blank';
             }
-            if(strlen($_POST['password']) < 4){
+            if(strlen($_POST['password']) < 4){//『strlen』文字数チェック、4文字未満ならば、$error['password']を生成、'length'を入れる→文字数不足
                 $error['password']='length';
             }
-            if($_POST['password']==''){
+            if($_POST['password']==''){//['password']空白の場合、$error['userID']生成、'blanl'を入れる→未入力
                 $error['password']='blank';
             }
-            //ファイルチェック
-            //$_FILESはファイルアップ時に、ファイルが代入される変数、フォームのname属性がキーになる→$_FILES['image']
-            //連想配列でもあるので、ファイル名・一時的にアップロードされたファイル名が代入→$_FILES['image']['name']でいったん$fileName(変数)に取り出している。
-            //issetで、$fileName(変数)が空でないかチェック
-            //substrファンクションで拡張子を取り出す→$ext(変数)に代入
-            //jpg,gif,png以外の拡張子だった場合→$error変数に'type'を代入
-            $fileName=$_FILES['image']['name'];
-            if(isset($fileName)){
-                $ext=substr($fileName, -3);
-                if($ext != 'jpg' && $ext != 'gif' && $ext != 'png'){
+
+            
+            //iconファイル
+            $fileName=$_FILES['image']['name'];//ファイル名・一時的にupされたファイル名代入→$_FILES['image']['name']で$fileNameに取り出す
+            if(isset($fileName)){//$fileNameが空でないかチェック
+                $ext=substr($fileName, -3);//substrファンクションで拡張子を取り出す→$ext(変数)に代入
+                if($ext != 'jpg' && $ext != 'gif' && $ext != 'png'){//jpg,gif,png以外の拡張子だった場合、$error変数に'type'を代入→拡張子エラー
                     $error['image'] = 'type';
                 }
             }
             
             //重複チェック
-            if(isset($_POST['userID'])){
+            if(isset($_POST['userID'])){//['userID']が空でないかチェック
                 $sql=sprintf('SELECT COUNT(*) AS cnt FROM members WHERE userID="%s"',
-                            mysqli_real_escape_string($db,$_POST['userID'])
-                            );
+                            mysqli_real_escape_string($db,$_POST['userID'])//mysqli_real_escape_string→無害化
+                            );//DBにuserIDの件数を探しに行く
                 $record=mysqli_query($db,$sql) or die(mysqli_error($db));
-                $table=mysqli_fetch_assoc($record);
-                if($table['cnt'] > 0){
+                $table=mysqli_fetch_assoc($record);//mysqli_query・mysqli_fetch_assoc→$table変数を取り出す
+                if($table['cnt'] > 0){//『COUNT(*) AS』：件数、$table['cnt']で件数を取得→件数が1以上だったら、重複エラー
                     $error['userID_dup']='duplicate';
                 }
             }
             
-            if(empty($error)){
+            if(empty($error)){//入力項目に異常なし
+                
                 //画像up
-                //move_uploaded_fileファンクションを使用
-                //アップロードされたファイル名を、ファイルアップロードした時間に変更(画像重複を回避)
-                //拡張子をそのまま利用することが出来る。
-                $image = date('YmdHis') . $_FILES['image']['name'];
-                move_uploaded_file($_FILES['image']['tmp_name'],'../member_icon/'. $image);
+                $image = date('YmdHis') . $_FILES['image']['name'];//ファイル名を、ファイルupした時間に変更(画像重複を回避),拡張子をそのまま利用可能
+                move_uploaded_file($_FILES['image']['tmp_name'],'../member_icon/'. $image);//member_iconに保存
                 
                 $_SESSION['join']=$_POST;
-                $_SESSION['join']['image']=$image;
+                $_SESSION['join']['image']=$image;//生成したファイル名をセッションに保存
                 header('Location:check.php');
                 exit();
             }
         }
 
         //書き直し
-        if(isset($_REQUEST['action'])){
+        if(isset($_REQUEST['action'])){//書き直す場合
             if($_REQUEST['action'] == 'rewrite'){
-                $_POST=$_SESSION['join'];
-                $error['rewrite']=true;
+                $_POST=$_SESSION['join'];//消えたフォーム内容を、$_SESSION['join']で書き戻す
+                $error['rewrite']=true;//$error['rewrite']→画像再指定エラーを出すため
             }
         }
 ?>
@@ -110,21 +101,21 @@
                     if(isset($_POST['userID']))
                     echo htmlspecialchars($_POST['userID'],ENT_QUOTES,'UTF-8'); ?>">
                         <?php if (isset($error['userID'])): ?>
-                            <p class="error">※ユーザーIDを入力してください。</p>
-                            <?php endif; ?>
-                                <?php if (isset($error['userID_dup'])): ?>
-                                    <p class="error">※このユーザーIDは既に登録済みです。</p>
-                                    <?php endif; ?>
+                        <p class="error">※ユーザーIDを入力してください。</p>
+                        <?php endif; ?>
+                        <?php if (isset($error['userID_dup'])): ?>
+                        <p class="error">※このユーザーIDは既に登録済みです。</p>
+                        <?php endif; ?>
                     </dd>
                     <!--パスワード------------->
                     <dt>パスワード<span class="required">必須</span></dt>
                     <dd>
                         <input type="text" name="password" size="10" maxlength="20" value="<?php
-                    if(isset($_POST['password']))
-                    echo htmlspecialchars($_POST['password'],ENT_QUOTES,'UTF-8'); ?>">
+                        if(isset($_POST['password']))
+                        echo htmlspecialchars($_POST['password'],ENT_QUOTES,'UTF-8'); ?>">
                         <?php if (isset($error['password'])): ?>
-                            <p class="error">※4文字以上のパスワードを入力して下さい。</p>
-                            <?php endif; ?>
+                        <p class="error">※4文字以上のパスワードを入力して下さい。</p>
+                        <?php endif; ?>
                     </dd>
                     <!--アイコン------------->
                     <dt>アイコン画像</dt>
@@ -132,6 +123,9 @@
                         <input name="image" type="file" id="image" size="35">
                         <?php if(isset($error['image'])): ?>
                         <p class="error">画像を再指定して下さい。(.jpg/.png/.gif)</p>
+                        <?php endif; ?>
+                        <?php if (isset($error['rewrite'])): ?>
+                        <p class="error">画像の再指定をお願いします。</p>
                         <?php endif; ?>
                     </dd>
                 </dl>
@@ -143,7 +137,7 @@
         <!--fotter-->
         <footer>
             <hr>
-            <small> Copyright (c) 2015 E14C2002 Fujimoto Sachiko, All Rights Reserved.</small>
+            <small> Copyright (c) 2015 Fujimoto Sachiko, All Rights Reserved.</small>
             <hr>
         </footer>
 

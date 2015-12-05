@@ -7,17 +7,16 @@
             exit();
         }
         
-        if(!empty($_POST)){
-            //登録処理
+        if(!empty($_POST)){//登録処理
             $sql=sprintf('INSERT INTO members SET name="%s",userID="%s",password="%s",icon="%s",created="%s"',
-                        mysqli_real_escape_string($db,$_SESSION['join']['name']),
-                        mysqli_real_escape_string($db,$_SESSION['join']['userID']),
-                        mysqli_real_escape_string($db,sha1($_SESSION['join']['password'])),
-                        mysqli_real_escape_string($db,$_SESSION['join']['image']),
+                        mysqli_real_escape_string($db,$_SESSION['join']['name']),//ニックネームを無害化
+                        mysqli_real_escape_string($db,$_SESSION['join']['userID']),//ユーザIDを無害化
+                        mysqli_real_escape_string($db,sha1($_SESSION['join']['password'])),//パスワードを暗号化
+                        mysqli_real_escape_string($db,$_SESSION['join']['image']),//アイコン画像を無害化
                         date('Y-m-d H:i:s')
                         );
             mysqli_query($db,$sql) or die(mysqli_error($db));
-            unset($_SESSION['join']);
+            unset($_SESSION['join']);//セッションから入力情報を削除
             header('Location:thanks.php');
             exit();
         }
